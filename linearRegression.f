@@ -15,7 +15,7 @@ C *********************
       PROGRAM LINEARREG
 
 C ********************
-C  VARIABLE DEFINITOINS
+C  VARIABLE DEFINITIONS
 C
 C 
 C  S       INPUT STRING
@@ -51,5 +51,30 @@ C ********************
       DOUBLE PRECISION     B0
       DOUBLE PRECISION     B1
 
+C***************************************************************************
+C VARIABLE INITIALIZATION
+C***************************************************************************
+ 
+      N       = 0.0D0
+      SUMX    = 0.0D0
+      SUMY    = 0.0D0
+      SUMX2   = 0.0D0
+      SUMY2   = 0.0D0
+      SUMXY   = 0.0D0 
+
+    
+      OPEN(UNIT=10, FILE="mpg.csv")
+      
+      DO N = 1, 398
+        READ(10, *) X, Y
+        SUMX  = SUMX + X
+        SUMY  = SUMY + Y
+        SUMX2 = SUMX2 + (X * X)
+        SUMY2 = SUMY2 + (Y * Y)
+        SUMXY = SUMXY + (X * Y)
+      END DO
+      CLOSE(10)
+
+      WRITE(*,*) SUMX, SUMY, SUMX2, SUMY2, SUMXY
       STOP
       END
